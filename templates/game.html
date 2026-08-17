@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <h1 class="title">HANGMAN</h1>
+
+        <p class="remaining">
+            You have: {{ remaining_guesses }} wrong guess{{ 'es' if remaining_guesses != 1 else '' }} left.
+        </p>
+
+        <pre id="hangman-art">{{ hangman_state }}</pre>
+
+        <p class="word">{{ word_display }}</p>
+        <p class="message">{{ message }}</p>
+
+        {% if guessed_letters %}
+            <p class="guessed">Guessed Letters: {{ guessed_letters | join(', ') }}</p>
+        {% endif %}
+
+        {% if game_over %}
+            {% if win %}
+                <p class="victory"><strong>🎉 YOU WON! 🎉</strong></p>
+            {% else %}
+                <p class="defeat"><strong>Game Over!</strong></p>
+            {% endif %}
+            <p><strong>The word was: <code>{{ revealed_word }}</code></strong></p>
+
+            {% if win %}
+            <form action="{{ url_for('enter_name') }}" method="get">
+                <button type="submit">Save Your Score</button>
+            </form>
+            {% endif %}
+
+        {% else %}
+            <form method="POST" action="{{ url_for('game') }}">
+                <label class="guess" for="guess">Enter a letter:</label>
+                <input class="guess" type="text" name="guess" maxlength="1" required autofocus pattern="[A-Za-z]">
+                <button type="submit">Guess</button>
+            </form>
+        {% endif %}
+
+        <br>
+        <form method="GET" action="{{ url_for('index') }}">
+            <button type="submit">Restart Game</button>
+        </form>
+    </main>
+</body>
+</html>
+

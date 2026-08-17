@@ -1,0 +1,133 @@
+body {
+    background-color: #0d0d0d;
+    color: #55ff55;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 40px auto;
+    width: 90%;
+    max-width: 700px;
+    padding: 25px;
+    background-color: #000000;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 15px #00ff0055;
+    border-radius: 10px;
+}
+
+pre#hangman-art {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    white-space: pre;
+    color: #55ff55;
+    background-color: #000000;
+    padding: 12px;
+    border: 1px dashed #00ff00;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ff0040;
+    margin: 20px auto;
+}
+
+.word {
+    font-size: 32px;
+    letter-spacing: 6px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: #55ff55;
+}
+
+.guessed {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #55ff55;
+}
+
+.message {
+    font-size: 1.2em;
+    margin: 15px 0;
+    color: #55ff55;
+}
+
+.remaining {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: #55ff55;
+}
+
+.highscore {
+    color: #55ff55;
+}
+
+.names {
+    font-size: 1.3em;
+}
+
+.title {
+    color: #55ff55;
+}
+
+.selector {
+    color: #55ff55;
+}
+
+.guess {
+    color: #55ff55;
+}
+
+input[type="text"] {
+    font-size: 20px;
+    padding: 6px;
+    width: 60px;
+    text-align: center;
+    border: 1px solid #55ff55;
+    background-color: #000000;
+    color: #55ff55;
+    border-radius: 4px;
+    outline: none;
+}
+
+button {
+    font-size: 18px;
+    padding: 8px 14px;
+    margin: 10px;
+    background-color: #000000;
+    color: #55ff55;
+    border: 1px solid #55ff55;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #55ff0055;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #003300;
+    color: #ccffcc;
+    box-shadow: 0 0 16px #55ff55;
+}
+
+.victory {
+    color: #00ffcc;
+    font-size: 1.5em;
+    margin-top: 15px;
+    text-shadow: 0 0 5px #00ffee;
+}
+
+.defeat {
+    color: #ff3366;
+    font-size: 1.5em;
+    margin-top: 15px;
+    text-shadow: 0 0 5px #ff3366;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    color: #000000;
+    background: #00ff00;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
