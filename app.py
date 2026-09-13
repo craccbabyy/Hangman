@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session
 import random
 import sqlite3
-from RandomWords import easy_wordlist, medium_wordlist, hard_wordlist, insane_wordlist, wrong_answer_replies, correct_answer_replies
+from RandomWords import easy_wordlist, hard_wordlist, wrong_answer_replies, correct_answer_replies
 
 DB_PATH = '/var/www/hangman/scores.db'
 
@@ -110,15 +110,14 @@ HANGMAN_PICS = [
 
 def get_word_by_difficulty(difficulty):
     if difficulty == "easy":
-        return random.choice(easy_wordlist), 0, 8
-    elif difficulty == "medium":
-        return random.choice(medium_wordlist), 2, 6
+        word, category = random.choice(easy_wordlist)
+        return word, category, 0, 8
     elif difficulty == "hard":
-        return random.choice(hard_wordlist), 4, 4
-    elif difficulty == "insane":
-        return random.choice(insane_wordlist), 5, 3
+        word, category = random.choice(hard_wordlist)
+        return word, category, 4, 4
     else:
-        return random.choice(medium_wordlist), 2, 6
+        word, category = random.choice(easy_wordlist)
+        return word, category, 0, 8
 
 @app.route('/')
 def index():
@@ -127,8 +126,9 @@ def index():
 @app.route('/start', methods=['POST'])
 def start():
     difficulty = request.form['difficulty']
-    word, initial_gallows, max_wrong = get_word_by_difficulty(difficulty)
+    word, category, initial_gallows, max_wrong = get_word_by_difficulty(difficulty)
     session['word'] = word.upper()
+    session['category'] = category
     session['guessed_letters'] = []
     session['wrong_guesses'] = 0
     session['initial_gallows'] = initial_gallows
@@ -141,6 +141,7 @@ def game():
         return redirect(url_for('index'))
 
     word = session['word']
+    category = session['category']
     guessed_letters = session['guessed_letters']
     wrong_guesses = session['wrong_guesses']
     initial_gallows = session['initial_gallows']
@@ -176,6 +177,7 @@ def game():
 
         return render_template('game.html',
             word=word,
+            category=category,
             word_display=word,
             hangman_state=HANGMAN_PICS[gallows_phase].rstrip(),
             message="You Won! 🎉",
@@ -196,6 +198,7 @@ def game():
         return render_template('game.html',
             remaining_guesses=remaining_guesses,
             word=word,
+            category=category,
             word_display=word_display,
             hangman_state=hangman_state,
             message="❌Game Over!❌",
@@ -210,6 +213,7 @@ def game():
 
     return render_template('game.html',
         word_display=word_display,
+        category=category,
         hangman_state=hangman_state,
         message=message,
         guessed_letters=guessed_letters,

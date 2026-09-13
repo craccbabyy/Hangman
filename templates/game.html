@@ -17,6 +17,15 @@
         <pre id="hangman-art">{{ hangman_state }}</pre>
 
         <p class="word">{{ word_display }}</p>
+        
+        <button type="button" id="category-button" onclick="revealCategory()">
+            Reveal Category
+        </button>
+
+        <p id="category" style="display: none;">
+            Category: <strong>{{ category }}</strong>
+        </p>
+
         <p class="message">{{ message }}</p>
 
         {% if guessed_letters %}
@@ -49,6 +58,12 @@
         <form method="GET" action="{{ url_for('index') }}">
             <button type="submit">Restart Game</button>
         </form>
+        <script>
+            function revealCategory() {
+                document.getElementById("category").style.display = "block";
+                document.getElementById("category-button").style.display = "none";
+            }
+        </script>
     </main>
 </body>
 </html>
